@@ -7,15 +7,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0a0a0f;
-      --bg2: #111118;
-      --card: #16161f;
-      --border: #2a2a3a;
-      --accent: #ff6b1a;
-      --accent2: #ff9a56;
-      --text: #e8e8f0;
-      --muted: #7a7a9a;
-      --white: #ffffff;
+      --bg: #f8f7f4;
+      --bg2: #f0ede8;
+      --card: #ffffff;
+      --border: #e2ddd8;
+      --accent: #e85d10;
+      --accent2: #ff7a2e;
+      --text: #1a1a2e;
+      --muted: #6b6360;
+      --white: #111118;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -47,7 +47,7 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.2rem 4rem;
       backdrop-filter: blur(20px);
-      background: rgba(10,10,15,0.8);
+      background: rgba(248,247,244,0.9);
       border-bottom: 1px solid var(--border);
     }
 
@@ -656,11 +656,7 @@
     .form-group input,
     .form-group textarea {
       width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 0.5rem;
-      padding: 0.9rem 1rem;
-      color: var(--text);
+      background: var(--bg2);
       font-family: 'DM Sans', sans-serif;
       font-size: 0.9rem;
       transition: border-color 0.2s;
@@ -705,8 +701,6 @@
       display: block;
       width: 24px; height: 2px;
       background: var(--text);
-      border-radius: 2px;
-      transition: all 0.3s;
     }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
@@ -716,7 +710,7 @@
       display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(10,10,15,0.97);
+      background: rgba(248,247,244,0.98);
       z-index: 150;
       flex-direction: column;
       align-items: center;
