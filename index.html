@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tim Chauchoy – Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --card: #16161f;
+      --border: #2a2a3a;
+      --accent: #ff6b1a;
+      --accent2: #ff9a56;
+      --text: #e8e8f0;
+      --muted: #7a7a9a;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 4rem;
+      backdrop-filter: blur(20px);
+      background: rgba(10,10,15,0.8);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex; gap: 2.5rem; list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0 4rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,107,26,0.12) 0%, transparent 70%);
+      top: 50%; left: 30%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-left { position: relative; z-index: 1; }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,107,26,0.12);
+      border: 1px solid rgba(255,107,26,0.3);
+      border-radius: 2rem;
+      padding: 0.4rem 1rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero-title-accent {
+      -webkit-text-stroke: 2px var(--accent);
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin: 1.2rem 0 2rem;
+      max-width: 480px;
+      line-height: 1.7;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border-radius: 0.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+    }
+    .btn-primary:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(255,107,26,0.35);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .hero-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+    }
+
+    .hero-avatar {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--accent), #c4420a);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .stat {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1rem;
+    }
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    .badge-row {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .badge {
+      background: rgba(255,107,26,0.1);
+      border: 1px solid rgba(255,107,26,0.2);
+      color: var(--accent2);
+      border-radius: 2rem;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 6rem 4rem;
+      position: relative;
+    }
+
+    .section-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      opacity: 0.7;
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--white);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg); }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 3rem 2.5rem;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.5s ease;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -0.45rem; top: 0.35rem;
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    .tl-date {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .tl-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+
+    .tl-company {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .tl-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
+
+    .tl-tag {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 0.3rem;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.72rem;
+    }
+
+    .tl-bullets {
+      list-style: none;
+    }
+
+    .tl-bullets li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding: 0.25rem 0;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .tl-bullets li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg2); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.8rem;
+      transition: border-color 0.2s, transform 0.2s;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    .skill-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .skill-card:hover {
+      border-color: rgba(255,107,26,0.4);
+      transform: translateY(-4px);
+    }
+
+    .skill-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,107,26,0.1);
+      border-radius: 0.7rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .skill-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .skill-list li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skill-list li::before {
+      content: '';
+      width: 4px; height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--bg); }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    .edu-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .edu-card:hover {
+      border-color: rgba(255,107,26,0.4);
+      transform: translateY(-4px);
+    }
+
+    .edu-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .edu-card:hover::after { transform: scaleX(1); }
+
+    .edu-year {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .edu-degree {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-school {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg2); }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .contact-left h2 {
+      margin-bottom: 1rem;
+    }
+
+    .contact-left p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1rem 1.2rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .contact-item:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateX(6px);
+    }
+
+    .contact-item-icon {
+      width: 36px; height: 36px;
+      background: rgba(255,107,26,0.1);
+      border-radius: 0.5rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-item-info { flex: 1; }
+
+    .contact-item-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .contact-item-value {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .contact-right {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-right::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+    }
+
+    .contact-right h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 0.9rem 1rem;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .form-group textarea { height: 100px; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem 4rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    footer span { color: var(--accent); }
+
+    /* ── SCROLL REVEAL ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 2rem; }
+      .nav-links { display: none; }
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 8rem 2rem 4rem;
+        text-align: center;
+      }
+      .hero-cta { justify-content: center; }
+      .hero-subtitle { margin: 1rem auto 2rem; }
+      section { padding: 4rem 2rem; }
+      .contact-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Tim<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#experience">Expérience</a></li>
+    <li><a href="#skills">Compétences</a></li>
+    <li><a href="#education">Formation</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-left">
+    <div class="hero-tag">Disponible · Île-de-France</div>
+    <h1>Tim<br><span class="hero-title-accent">Chauchoy</span></h1>
+    <p class="hero-subtitle">
+      Ingénieur Technico-Commercial B2B — je transforme la complexité technique en opportunités commerciales. Alternance chez Testoon, 50+ comptes clients, cycle de vente end-to-end.
+    </p>
+    <div class="hero-cta">
+      <a href="mailto:timchauchoy@gmail.com" class="btn btn-primary">✉ Me contacter</a>
+      <a href="#experience" class="btn btn-secondary">Voir mon parcours ↓</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hero-avatar">TC</div>
+      <h3>Tim Chauchoy</h3>
+      <p>Ingénieur Technico-Commercial · 21 ans · Paris</p>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Comptes clients</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">B2B</div>
+          <div class="stat-label">Spécialité</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Ans d'expérience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">B2</div>
+          <div class="stat-label">Anglais</div>
+        </div>
+      </div>
+      <div class="badge-row">
+        <span class="badge">Vente technique</span>
+        <span class="badge">Prospection</span>
+        <span class="badge">Négociation</span>
+        <span class="badge">Électrotechnique</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>Expérience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="tl-date">Sept 2025 – Août 2026</div>
+      <div class="tl-title">Technico-Commercial B2B</div>
+      <div class="tl-company">Testoon — Châtillon · Alternance</div>
+      <div class="tl-tags">
+        <span class="tl-tag">B2B</span>
+        <span class="tl-tag">CRM Odoo</span>
+        <span class="tl-tag">Prospection</span>
+        <span class="tl-tag">Vente technique</span>
+      </div>
+      <ul class="tl-bullets">
+        <li>Développement commercial B2B du secteur technique</li>
+        <li>Gestion et suivi d'un portefeuille de plus de 50 comptes clients et partenaires</li>
+        <li>Analyse des besoins et proposition de solutions techniques adaptées</li>
+        <li>Démonstrations produits et présentations commerciales</li>
+        <li>Prospection de nouveaux clients (téléphone, e-mail, actions ciblées)</li>
+        <li>Interface entre techniciens et clients</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-date">Nov 2025 – Juin 2026</div>
+      <div class="tl-title">Projet Entrepreneurial — HubDépanne</div>
+      <div class="tl-company">IUT Cachan · Projet étudiant</div>
+      <div class="tl-tags">
+        <span class="tl-tag">Entrepreneuriat</span>
+        <span class="tl-tag">Stratégie</span>
+        <span class="tl-tag">Pitch</span>
+      </div>
+      <ul class="tl-bullets">
+        <li>Analyse marché et stratégie commerciale</li>
+        <li>Prospection et présentation clients/partenaires</li>
+        <li>Conception des services et suivi projet</li>
+        <li>Pitch devant jury — Challenge Entrepreneuriat IUT de Sceaux</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-date">Déc 2024 – Jan 2025</div>
+      <div class="tl-title">Stage Maintenance Électrotechnique</div>
+      <div class="tl-company">SNCF Technicentre Atlantique — Châtillon</div>
+      <div class="tl-tags">
+        <span class="tl-tag">Électrotechnique</span>
+        <span class="tl-tag">Maintenance</span>
+        <span class="tl-tag">Sécurité critique</span>
+      </div>
+      <ul class="tl-bullets">
+        <li>Diagnostic et maintenance de systèmes électriques (hacheurs, DJC, onduleurs)</li>
+        <li>Travail en environnement normé et sécurité critique</li>
+        <li>Interface entre équipes techniques et exploitation</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-date">Juin – Juillet 2024</div>
+      <div class="tl-title">Stage Installations Électriques</div>
+      <div class="tl-company">CORALEC — Fontenay-aux-Roses</div>
+      <div class="tl-tags">
+        <span class="tl-tag">Électricité</span>
+        <span class="tl-tag">Schémas électriques</span>
+      </div>
+      <ul class="tl-bullets">
+        <li>Expérience pratique en installation électrique</li>
+        <li>Lecture de schémas électriques et plans d'exécution</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-date">Sept 2024 – Aujourd'hui</div>
+      <div class="tl-title">Intérim — Vente & Communication</div>
+      <div class="tl-company">Globe — Paris</div>
+      <div class="tl-tags">
+        <span class="tl-tag">Contact client</span>
+        <span class="tl-tag">Distribution</span>
+      </div>
+      <ul class="tl-bullets">
+        <li>Distribution de produits, contact direct avec la clientèle</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>Compétences</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-icon">💼</div>
+      <h3>Développement Commercial</h3>
+      <ul class="skill-list">
+        <li>Prospection B2B (téléphone & mailing)</li>
+        <li>Élaboration d'offres commerciales</li>
+        <li>Négociation & conclusion de ventes</li>
+        <li>Suivi & fidélisation de portefeuille</li>
+        <li>Développement new business</li>
+        <li>Approche conseil à valeur ajoutée</li>
+      </ul>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">⚡</div>
+      <h3>Environnement Technique</h3>
+      <ul class="skill-list">
+        <li>Installations électriques</li>
+        <li>Lecture de schémas (WinRelais, AutoCAD)</li>
+        <li>Simulation de circuits (Psim)</li>
+        <li>Maintenance en milieu industriel</li>
+        <li>Détection des besoins techniques</li>
+        <li>Interface techniciens / clients</li>
+      </ul>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🛠️</div>
+      <h3>Outils & Logiciels</h3>
+      <ul class="skill-list">
+        <li>CRM Odoo</li>
+        <li>Excel (tableaux de bord, analyse)</li>
+        <li>WinRelais</li>
+        <li>AutoCAD</li>
+        <li>Psim</li>
+        <li>Pack Office</li>
+      </ul>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🤝</div>
+      <h3>Soft Skills</h3>
+      <ul class="skill-list">
+        <li>Aisance relationnelle & sens du contact</li>
+        <li>Capacité à convaincre et négocier</li>
+        <li>Autonomie & persévérance</li>
+        <li>Réactivité & adaptabilité</li>
+        <li>Écoute active</li>
+        <li>Travail en équipe transverse</li>
+      </ul>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🌍</div>
+      <h3>Langues</h3>
+      <ul class="skill-list">
+        <li>Français — Natif</li>
+        <li>Anglais — B2 (usage professionnel)</li>
+        <li>Espagnol — B1 (niveau baccalauréat)</li>
+      </ul>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🚗</div>
+      <h3>Mobilité & Pratique</h3>
+      <ul class="skill-list">
+        <li>Permis B + véhicule personnel</li>
+        <li>Déplacements Île-de-France</li>
+        <li>Goût du terrain et de la prospection</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>Formation</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-year">2025 – 2026 · En cours</div>
+      <div class="edu-degree">Licence Pro Technico-Commercial</div>
+      <div class="edu-school">Université Paris Saclay · IUT de Cachan</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2023 – 2025</div>
+      <div class="edu-degree">BTS Électrotechnique</div>
+      <div class="edu-school">Lycée Technique Raspail · Paris 14e</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2020 – 2023</div>
+      <div class="edu-degree">Baccalauréat STI2D</div>
+      <div class="edu-school">Lycée Jean Jaurès · Châtenay-Malabry</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2>Contact</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-inner">
+    <div class="contact-left">
+      <p>Disponible pour des opportunités en Île-de-France. N'hésitez pas à me contacter pour discuter de tout projet ou poste en lien avec le commerce technique B2B.</p>
+      <div class="contact-items">
+        <a href="mailto:timchauchoy@gmail.com" class="contact-item">
+          <div class="contact-item-icon">✉</div>
+          <div class="contact-item-info">
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">timchauchoy@gmail.com</div>
+          </div>
+        </a>
+        <a href="tel:+33778472194" class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div class="contact-item-info">
+            <div class="contact-item-label">Téléphone</div>
+            <div class="contact-item-value">07 78 47 21 94</div>
+          </div>
+        </a>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div class="contact-item-info">
+            <div class="contact-item-label">Localisation</div>
+            <div class="contact-item-value">Paris · Île-de-France</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-right">
+      <h3>Envoyer un message</h3>
+      <div class="form-group">
+        <label>Nom</label>
+        <input type="text" placeholder="Votre nom" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="votre@email.com" />
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Bonjour Tim, je souhaitais vous contacter au sujet de…"></textarea>
+      </div>
+      <a href="mailto:timchauchoy@gmail.com" class="btn btn-primary" style="width:100%;justify-content:center;">Envoyer →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  Conçu & développé par <span>Tim Chauchoy</span> · 2026
+</footer>
+
+<script>
+  // Intersection Observer for reveal animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.timeline-item, .skill-card, .edu-card').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
