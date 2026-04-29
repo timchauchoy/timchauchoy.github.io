@@ -692,19 +692,108 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── RESPONSIVE ── */
+    /* ── HAMBURGER MENU ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10,10,15,0.97);
+      z-index: 150;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* ── TABLET ── */
     @media (max-width: 900px) {
-      nav { padding: 1rem 2rem; }
+      nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
+      .hamburger { display: flex; }
+
       .hero {
         grid-template-columns: 1fr;
-        padding: 8rem 2rem 4rem;
+        padding: 7rem 1.5rem 3rem;
         text-align: center;
+        gap: 2.5rem;
       }
       .hero-cta { justify-content: center; }
       .hero-subtitle { margin: 1rem auto 2rem; }
-      section { padding: 4rem 2rem; }
-      .contact-inner { grid-template-columns: 1fr; }
+      .hero-bg-glow { display: none; }
+
+      section { padding: 3.5rem 1.5rem; }
+
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+
+      .section-header { margin-bottom: 2rem; }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 480px) {
+      nav { padding: 1rem; }
+
+      .hero {
+        padding: 6rem 1rem 2.5rem;
+        gap: 2rem;
+      }
+
+      h1 { font-size: 2.8rem; }
+
+      .hero-card { padding: 1.5rem; }
+      .stat-row { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+      .stat-num { font-size: 1.3rem; }
+
+      section { padding: 3rem 1rem; }
+
+      h2 { font-size: 1.8rem; }
+
+      .section-header { gap: 0.6rem; }
+      .section-line { display: none; }
+
+      .skills-grid { grid-template-columns: 1fr; }
+
+      .timeline { padding-left: 1.2rem; }
+      .timeline-item { padding: 0 0 2rem 1.5rem; }
+      .tl-title { font-size: 1rem; }
+
+      .btn { padding: 0.75rem 1.4rem; font-size: 0.85rem; }
+      .hero-cta { flex-direction: column; align-items: center; }
+
+      .contact-item { padding: 0.8rem 1rem; }
+      .contact-right { padding: 1.5rem; }
+
+      footer { padding: 1.5rem 1rem; }
     }
   </style>
 </head>
@@ -719,7 +808,18 @@
     <li><a href="#education">Formation</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#experience" onclick="closeMenu()">Expérience</a>
+  <a href="#skills" onclick="closeMenu()">Compétences</a>
+  <a href="#education" onclick="closeMenu()">Formation</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="hero">
@@ -1029,6 +1129,18 @@
 </footer>
 
 <script>
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
   // Intersection Observer for reveal animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
